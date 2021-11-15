@@ -24,14 +24,14 @@ def singlethreadOps(): #function that single threadedly finds the max, min, and 
         print("command line argument required. run this program with an int argument.\n")
         exit()
     size = int(sys.argv[1])
-    arr = arrayBuilder(size)
+    array = arrayBuilder(size)
     start = time.time() #capture start time
     currmax, currmin, total = -1, 1048576, 0
-    for i in arr:
+    for i in array:
         currmax = max(currmax, max(i))
         currmin = min(currmin, min(i))
         total += sum(i)
-    print("max is", currmax, "min is", currmin, "sum is", total, "and average is", total/(size ** 2))
+    print("max is", currmax, "min is", currmin, "and average is", total/(size ** 2))
     stop = time.time() #capture end time after calculating and printing values
     print("single thread: time elapsed for N of", size, "is", format(stop-start, ".5f"), "seconds\n")
 
@@ -57,10 +57,12 @@ def multiThreadOps(): #function that creates a thread pool of size N and calcula
         pool.apply_async(rowVals, (row,))
     pool.close()
     pool.join()
-    print("max is", globalmax, "min is", globalmin, "sum is", globaltotal, "and average is", globaltotal/(size ** 2))
+    print("max is", globalmax, "min is", globalmin, "and average is", globaltotal/(size ** 2))
     stop = time.time()
     print("multithread: time elapsed for N of", size, "is", format(stop-start, ".3f"), "seconds\n")
 
-# lines of execution
-singlethreadOps()
-multiThreadOps()
+def main():
+    singlethreadOps()
+    multiThreadOps()
+
+main() # start of execution
