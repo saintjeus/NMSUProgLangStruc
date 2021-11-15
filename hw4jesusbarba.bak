@@ -1,0 +1,21 @@
+#lang racket
+#| Jesus Barba CS471-HW4 |#
+
+#|1. Write a function powerfour that given an integer n, returns true if n is a power of 
+four, else returns false. An integer n is a power of four, if there exists an integer x 
+such that n == 4x.  
+Not included in this assignment, but a frequent followup question in interviews: 
+Could you solve it without loops/recursion? Probably a good idea to at least look 
+at solutions that solve the above question without loops/recursion.|#
+
+#|2. Write a function insert-at that inserts an element at a given position into a list. Your 
+solution must use recursion.|#
+
+
+#|3. Write a function palindromep that is given a list and returns 1 if the list has the 
+same sequence of elements when read left to right as when read right to left. It 
+should return 0 otherwise.|#
+
+#|4. Write a function ifPrime that determines whether a given integer number is prime or 
+not. Return 0 if it is prime, 1 if it is not prime.  |#
+
