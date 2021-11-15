@@ -1,0 +1,62 @@
+(* 
+* Jesus Barba
+* CS471 - HW1
+*)
+
+let fEl (x, _, _) = x;;
+let sEl (_, x, _) = x;;
+let tEl (_, _, x) = x;;
+
+(* 1. Write a function number_in_months that
+takes a  list  of  dates  and  a  list  of  months
+(i.e., an int list) and returns the number of dates
+in the list of dates that are in any of the months in
+the list of months. Assume the list of months has no
+number repeated. You can use the function number_in_month
+that we wrote in class.*)
+
+let dates = [(9,8,21); (9,21,21); (10,31,21)];;
+let months = [9; 10];;
+
+let rec number_of_dates_in_month( (dates: (int*int*int) list), (month:int)) = 
+  if dates = [] then 0 
+  else if (fEl(List.hd(dates)))=month
+  then 1 + number_of_dates_in_month(List.tl(dates), month)
+  else number_of_dates_in_month(List.tl(dates), month);;
+
+let rec number_in_months( (dates: (int*int*int) list), (months:int list)) =
+  if months = [] then 0
+  else number_of_dates_in_month(dates, List.hd(months)) + number_in_months(dates, List.tl(months));;
+
+(*test for 1*)
+number_in_months(dates,months);; (*should evaluate to 3*)
+
+(* 2. Write a function get_nththat takes a list of strings and
+a positive int n and returns the nth element of the list where
+the head of the list is 1st. Do not worry about the case where
+the list has too few elements: your function may apply List.hd
+or List.tl to the empty list in this case, which is okay.
+Remember to use recursion in your solution.
+*)
+let rec get_nth( (strList: string list), (n:int)) =
+  if n=1 then List.hd(strList)
+  else get_nth(List.tl(strList), n-1);;
+let testList = ["boy"; "toy"; "named"; "Troy"];;
+
+(*test for 2*)
+get_nth(testList, 4);; (*should return "Troy"*)
+  
+(* 3. Write a function number_before_reaching_sum that
+takes an int called sum, which you  can  assume  is  positive,
+and  an  int  list,  which  you  can  assume  contains  all
+positive numbers, and returns an int. You should return an int n
+such that the first n elements of the list add to less than sum,
+but the first n + 1 elements of the list add to sum or more.
+Assume the entire list sums to more than the passed in value;
+it is okay for an exception to occur if this is not the case. *)
+let rec number_before_reaching_sum( (sum:int), (intList:int list)) =
+  if sum <= List.hd(intList) then 0
+  else 1+number_before_reaching_sum(sum-List.hd(intList), List.tl(intList));;
+
+let intList = [1;2;3;4];;
+number_before_reaching_sum(6, intList);; (*should return 2*)
